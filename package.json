@@ -1,0 +1,45 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Express API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist",
+    "dev:start": "nodemon",
+    "build": "rimraf dist && mkdir -p dist && babel src -s -D -d dist",
+    "lint": "eslint src",
+    "test": "npm run lint && jest \\.test.js --runInBand"
+  },
+  "keywords": [],
+  "author": "Cameron-Xie",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-validator": "^5.0.3",
+    "jsonwebtoken": "^8.2.0",
+    "lodash": "^4.17.5",
+    "nconf": "^0.10.0",
+    "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^23.0.0-alpha.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "jest": "^22.4.2",
+    "nodemon": "^1.17.2",
+    "rimraf": "^2.6.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "test/"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+version: '3'
+services:
+  nginx:
+    container_name: express_api_nginx
+    image: nginx:alpine
+    volumes:
+      - './docker/nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template'
+      - './:/var/www/api'
+    working_dir: '/var/www/api'
+    command: /bin/sh -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    environment:
+      - NGINX_HOST=${NGINX_HOST}
+    networks:
+      - proxy
+      - app
+    ports:
+      - ${WEB_IP}:${WEB_HTTP_PORT}:80
+    restart: always
+    depends_on:
+      - node
+  node:
+    container_name: express_api_node
+    image: node:alpine
+    volumes:
+      - './:/var/www/api'
+    working_dir: '/var/www/api'
+    networks:
+      - app
+    command: /bin/sh -c "npm run dev:start"
+    restart: always
+networks:
+  proxy:
+    driver: bridge
+  app:
+    driver: bridge

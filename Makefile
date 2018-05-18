@@ -1,4 +1,5 @@
 up:
+	@make create-dev-env
 	@make start-containers
 
 down:
@@ -9,7 +10,7 @@ test:
 
 install:
 	@make create-dev-env
-	@docker-compose run --rm --no-deps node npm install supertest
+	@docker-compose run --rm --no-deps node npm install
 
 start-containers:
 	@docker-compose up --build -d
